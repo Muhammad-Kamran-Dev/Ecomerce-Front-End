@@ -1,0 +1,56 @@
+@import "~react-image-gallery/styles/css/image-gallery.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer {
+  .hero-bg-gradient {
+    background: #9c20ee;
+
+    background: linear-gradient(
+      135deg,
+      hsla(276, 86%, 53%, 1) 0%,
+      hsla(40, 74%, 65%, 1) 100%
+    );
+  }
+
+  .clip-path {
+    clip-path: polygon(100% 72%, 0% 100%, 100% 100%);
+  }
+
+  .next {
+    background-color: #9c20ee;
+    padding: 20px;
+    @apply p-5 bg-purple-700 border-4 border-black;
+  }
+  .jump-next {
+    @apply p-5 bg-purple-700 border-4 border-black;
+  }
+  .animated-border:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    height: 4px;
+    width: 100%;
+    border-radius: 10px;
+    background-color: #ef4444;
+    animation: expandBorder 1s forwards;
+  }
+
+  @keyframes expandBorder {
+    0% {
+      left: -100%; /* Start outside the container */
+    }
+    100% {
+      left: 0; /* Extend to the full width */
+    }
+  }
+
+  /* PROFILE GRID */
+  .profile-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 200px 100px 1fr;
+  }
+}
