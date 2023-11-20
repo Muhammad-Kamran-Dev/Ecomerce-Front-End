@@ -23,7 +23,7 @@ import { RootState } from "@/redux/libs/store";
 const Sidebar = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const [priceInfo, setPriceInfo] = useState({ minPrice: 0, maxPrice: 25000 });
+  const [priceInfo, setPriceInfo] = useState({ minPrice: 0, maxPrice: 250000 });
   // Get the info from the redux store
   const {
     ratings,
@@ -79,7 +79,7 @@ const Sidebar = () => {
   const clearFilter = () => {
     dispatch(updateCategoryChecked([{}]));
     dispatch(updateCurrentPage(1));
-    dispatch(updateprice([0, 25000]));
+    dispatch(updateprice([0, 250000]));
     dispatch(updateRatings(0));
     router.replace("/products", undefined);
   };
