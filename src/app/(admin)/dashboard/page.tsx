@@ -1,18 +1,33 @@
 "use client";
 
+import OrderService from "@/services/orderService";
+import ProductService from "@/services/productService";
 import UserService from "@/services/userService";
 import { useEffect, useState } from "react";
 
-type userData = {
+type dashboardDataT = {
   totalUsers: number;
+  totalOrders: number;
+  totalProducts: number;
 };
 
 const Dashboard = () => {
-  const [userData, setUserData] = useState<userData>();
+  const [dashboardData, setDashboardData] = useState<dashboardDataT>();
   useEffect(() => {
     (async () => {
-      const response = await UserService.getAllUsers();
-      if (response?.status === 200) setUserData(response.data);
+      const usersResponse = await UserService.getAllUsers();
+      const productsResponse = await ProductService.getAllProducts();
+      const ordersResponse = await OrderService.getAllOrders();
+
+      const users = usersResponse.data.totalUsers;
+      const products = productsResponse.data.results;
+      const orders = ordersResponse.data.totalAmount;
+
+      setDashboardData({
+        totalUsers: users,
+        totalOrders: orders,
+        totalProducts: products,
+      });
     })();
   }, []);
   return (
@@ -27,17 +42,15 @@ const Dashboard = () => {
           {/* Dashboard Cards */}
           <div className="p-6 bg-white rounded-lg shadow-md">
             <h2 className="mb-4 text-xl font-semibold">Total Users</h2>
-            <p className="text-3xl font-bold">{userData?.totalUsers}</p>
+            <p className="text-3xl font-bold">{dashboardData?.totalUsers}</p>
           </div>
-
+          <div className="p-6 bg-white rounded-lg shadow-md">
+            <h2 className="mb-4 text-xl font-semibold">Total Products</h2>
+            <p className="text-3xl font-bold">{dashboardData?.totalProducts}</p>
+          </div>
           <div className="p-6 bg-white rounded-lg shadow-md">
             <h2 className="mb-4 text-xl font-semibold">Total Orders</h2>
-            <p className="text-3xl font-bold">0</p>
-          </div>
-
-          <div className="p-6 bg-white rounded-lg shadow-md">
-            <h2 className="mb-4 text-xl font-semibold">Revenue</h2>
-            <p className="text-3xl font-bold">$0</p>
+            <p className="text-3xl font-bold">{dashboardData?.totalOrders}</p>
           </div>
         </div>
       </div>

@@ -6,6 +6,15 @@ export interface Product {
 }
 
 class ProductService {
+  async getAllProducts() {
+    try {
+      const response = await axios.get("http://localhost:4000/api/v1/products");
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async getProduct(id: string) {
     try {
       const response = await axios.get(`${config.baseUrl}/products/${id}`);

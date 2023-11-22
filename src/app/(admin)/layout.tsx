@@ -28,7 +28,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       <AdminNavbar />
       <section className="flex w-full min-h-screen ">
         <DashboardSidebar />
-        <main className="flex-1 ">{children}</main>
+        <main className="flex-1 mb-10 ">{children}</main>
       </section>
     </>
   );

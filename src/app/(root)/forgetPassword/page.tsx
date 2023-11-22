@@ -17,6 +17,7 @@ import { useForm } from "react-hook-form";
 import { AiOutlineMail } from "react-icons/ai";
 import UserService from "@/services/userService";
 import toast from "react-hot-toast";
+import { AxiosError } from "axios";
 
 const ForgetPassword = () => {
   const router = useRouter();
@@ -28,10 +29,16 @@ const ForgetPassword = () => {
   });
 
   async function onSubmit(values: ForgetPasswordType) {
-    const res = await UserService.forgetPassword(values);
-    if (res.status === 200) {
-      toast.success("Password Reset Link Send to Your Email");
-      router.push("/login");
+    try {
+      const res = await UserService.forgetPassword(values);
+      if (res.status === 200) {
+        toast.success("Password Reset Link Send to Your Email");
+        router.push("/login");
+      }
+    } catch (error: any) {
+      if (error.response.status === 404) {
+        toast.error("Email Not Found");
+      }
     }
   }
 
