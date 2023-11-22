@@ -18,11 +18,7 @@ const Sidebar = () => {
       text: "All Users",
       icon: <AiOutlineUser />,
     },
-    {
-      path: "/statistics",
-      text: "Statistics",
-      icon: <CgChart />,
-    },
+
     {
       path: "/addProduct",
       text: "Add Product",
