@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { MdDashboard, MdUpload } from "react-icons/md";
-import { CgChart } from "react-icons/cg";
+import { CiDeliveryTruck } from "react-icons/ci";
 import { AiOutlineUser } from "react-icons/ai";
-import { MdProductionQuantityLimits } from "react-icons/md";
+import { BiCategoryAlt } from "react-icons/bi";
+import { FaDatabase } from "react-icons/fa";
 
 const Sidebar = () => {
   const DashboardNavLinks = [
@@ -27,12 +28,17 @@ const Sidebar = () => {
     {
       path: "/addCategory",
       text: "Add Category",
-      icon: <MdUpload />,
+      icon: <BiCategoryAlt />,
     },
     {
       path: "/productData",
       text: "Products",
-      icon: <MdProductionQuantityLimits />,
+      icon: <FaDatabase />,
+    },
+    {
+      path: "/ordersData",
+      text: "Orders",
+      icon: <CiDeliveryTruck />,
     },
   ];
   return (
