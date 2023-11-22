@@ -1,6 +1,9 @@
+"use client";
+
 import ProductService from "@/services/productService";
 import { Product, columns } from "./column";
 import { DataTable } from "./data-table";
+import { useEffect, useState } from "react";
 
 type ProductResponse = {
   _id: string;
@@ -12,7 +15,6 @@ type ProductResponse = {
 };
 
 async function getData(): Promise<Product[]> {
-  // Fetch data from your API here.
   const response = await ProductService.getAllProducts();
   const data = response.data.products;
   const formattedData = data.map((product: ProductResponse) => {
@@ -30,11 +32,20 @@ async function getData(): Promise<Product[]> {
 }
 
 export default async function Page() {
-  const data = await getData();
+  const [data, setData] = useState<Product[]>();
+
+  useEffect(() => {
+    (async () => {
+      const data = await getData();
+      setData(data);
+    })();
+  }, []);
 
   return (
-    <div className="container mx-auto py-10">
-      <DataTable columns={columns} data={data} />
-    </div>
+    data && (
+      <div className="container mx-auto py-10">
+        <DataTable columns={columns} data={data} />
+      </div>
+    )
   );
 }
